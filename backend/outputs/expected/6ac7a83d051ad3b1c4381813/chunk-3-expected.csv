@@ -1,0 +1,6 @@
+metric,value
+row_count,4
+total_salary,300000
+average_salary,75000
+minimum_salary,64000
+maximum_salary,86000
