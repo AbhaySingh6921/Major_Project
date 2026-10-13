@@ -19,31 +19,22 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
-    const root = document.documentElement;
-
-    const applyTheme = () => {
-      let isDark = false;
+    const computeIsDark = () => {
       if (theme === 'system') {
-        isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      } else {
-        isDark = theme === 'dark';
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
       }
-
-      if (isDark) {
-        root.classList.add('dark');
-        setResolvedTheme('dark');
-      } else {
-        root.classList.remove('dark');
-        setResolvedTheme('light');
-      }
+      return theme === 'dark';
     };
 
-    applyTheme();
+    const isDark = computeIsDark();
+    setResolvedTheme(isDark ? 'dark' : 'light');
     localStorage.setItem('decompute-theme', theme);
 
     if (theme === 'system') {
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      const handleChange = () => applyTheme();
+      const handleChange = (e: MediaQueryListEvent) => {
+        setResolvedTheme(e.matches ? 'dark' : 'light');
+      };
       mediaQuery.addEventListener('change', handleChange);
       return () => mediaQuery.removeEventListener('change', handleChange);
     }

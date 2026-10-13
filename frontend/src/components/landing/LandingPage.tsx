@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../Navbar';
 import { HeroSection } from '../HeroSection';
@@ -16,6 +16,11 @@ import { useMarketplace } from '../../context/MarketplaceContext';
 export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
   const { auth, backendOnline, loginAs, logout } = useMarketplace();
+
+  // Enforce strictly light mode on the landing page
+  useEffect(() => {
+    document.documentElement.classList.remove('dark');
+  }, []);
 
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [roleIntent, setRoleIntent] = useState<'requester' | 'provider' | null>(null);
@@ -59,7 +64,7 @@ export const LandingPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] dark:bg-[#09090B] text-[#18181B] dark:text-[#FAFAFA] flex flex-col font-sans transition-colors">
+    <div className="min-h-screen bg-[#FAFAFA] text-[#18181B] flex flex-col font-sans">
       {/* Navigation */}
       <Navbar
         auth={auth}

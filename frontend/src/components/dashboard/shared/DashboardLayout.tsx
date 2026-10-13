@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DashboardSidebar } from './DashboardSidebar';
 import { DashboardHeader } from './DashboardHeader';
+import { useTheme } from '../../../context/ThemeContext';
 
 interface DashboardLayoutProps {
   role: 'requester' | 'provider';
@@ -16,6 +17,21 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   children,
 }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  // Apply dark mode only within the dashboard views
+  useEffect(() => {
+    if (resolvedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    return () => {
+      // Clean up and ensure landing page remains light mode
+      document.documentElement.classList.remove('dark');
+    };
+  }, [resolvedTheme]);
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] dark:bg-[#09090B] text-[#18181B] dark:text-[#FAFAFA] flex flex-col font-sans transition-colors">
