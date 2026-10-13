@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FAFAFA;
+  --foreground: #18181B;
+  --muted: #71717A;
+  --border: #E4E4E7;
+  --accent: #059669;
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'Geist Mono', monospace;
+  }
+}
+
+/* Subtle grid pattern background utility */
+.tech-grid-bg {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(228, 228, 231, 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(228, 228, 231, 0.45) 1px, transparent 1px);
+}
+
+/* Network visualization pulses and animations */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 0.3; transform: scale(0.98); }
+  50% { opacity: 0.9; transform: scale(1.02); }
+}
+
+@keyframes packet-flow-1 {
+  0% { offset-distance: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
