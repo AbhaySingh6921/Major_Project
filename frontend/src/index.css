@@ -10,6 +10,14 @@
   --accent: #059669;
 }
 
+.dark {
+  --background: #09090B;
+  --foreground: #FAFAFA;
+  --muted: #A1A1AA;
+  --border: #27272A;
+  --accent: #10B981;
+}
+
 @layer base {
   body {
     background-color: var(--background);
@@ -20,6 +28,12 @@
   code, pre, .font-mono {
     font-family: 'Geist Mono', monospace;
   }
+}
+
+.dark .tech-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(39, 39, 42, 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(39, 39, 42, 0.45) 1px, transparent 1px);
 }
 
 /* Subtle grid pattern background utility */

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -9,6 +10,13 @@ export default {
       colors: {
         background: '#FAFAFA',
         foreground: '#18181B',
+        dark: {
+          bg: '#09090B',
+          surface: '#121215',
+          card: '#18181B',
+          border: '#27272A',
+          hover: '#1F1F23',
+        },
         muted: {
           DEFAULT: '#71717A',
           foreground: '#71717A',
@@ -18,6 +26,7 @@ export default {
           DEFAULT: '#059669',
           hover: '#047857',
           light: '#ECFDF5',
+          dark: '#064E3B',
         },
       },
       fontFamily: {
